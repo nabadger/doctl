@@ -10,4 +10,9 @@ EOF
 apt-get update -y
 
 apt-get install -y docker.io
-apt-get install -y --allow-unauthenticated kubelet kubeadm kubectl kubernetes-cni
+apt-get install -y --allow-unauthenticated kubelet kubeadm kubectl kubernetes-cni python 
+
+cd /tmp
+wget https://github.com/digitalocean/doctl/releases/download/v1.6.1/doctl-1.6.1-linux-amd64.tar.gz
+tar zxvf doctl-1.6.1-linux-amd64.tar.gz
+mv doctl /usr/bin
