@@ -1,6 +1,6 @@
 #!/bin/bash
 # Replace this with the token 
-TOKEN=7d0a28.c15cb1494e08f5f
+TOKEN=85a6bb.e31a64e95ff5949b
 
 apt-get update && apt-get upgrade -y 
 

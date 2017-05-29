@@ -2,7 +2,7 @@
 # Replace this with the token
 TOKEN=7d0a28.c15cb1494e08f5f
 
-MASTER_IP=46.101.47.43
+MASTER_IP=46.101.36.175
 
 apt-get update && apt-get upgrade -y
 

@@ -35,7 +35,6 @@ MASTER_ID=`doctl compute droplet list | grep "master" |cut -d' ' -f1`
 MASTER_IP=`doctl compute droplet get $MASTER_ID --format PublicIPv4 --no-header`
 
 # Run this after a few minutes. Wait till Kubernetes Master is up and running
-echo "Waiting for 3 minutes seconds for kubernetes to install on master"
 sleep 120 
 
 
@@ -51,7 +50,8 @@ doctl compute droplet create node1 \
 	--ssh-keys $SSH_KEY \
 	--user-data-file  ./node.sh \
 	--wait
-sleep 60
+
+sleep 120
 
 scp -i $ssh_key_file root@$MASTER_IP:/etc/kubernetes/admin.conf $HOME/.kube/config
 
@@ -60,5 +60,5 @@ NODE_IDS=`doctl compute droplet list | grep "node"| cut -d' ' -f1`
 while read -r node_id; do 
     node_ip=`doctl compute droplet get $node_id --format PublicIPv4 --no-header`
     ssh -i $ssh_key_file root@$node_ip mkdir -p .kube
-    scp -i $ssh_key_file $HOME/.kube/config root@$node_ip:.kube/config
+    scp -i $ssh_key_file $HOME/.kube/config root@$node_ip:admin.conf
 done <<< "$NODE_IDS"
