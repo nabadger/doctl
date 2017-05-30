@@ -3,7 +3,7 @@
 REGION=lon1
 
 # Generate SSH Keys
-ssh_key_file="/Users/nick/.ssh/k8s_do_id_rsa"
+ssh_key_file="$HOME/.ssh/do_id_rsa"
 ssh-keygen -t rsa -f $ssh_key_file
 
 # Import SSH Keys
@@ -24,7 +24,7 @@ sed -i.bak "s/^TOKEN=.*/TOKEN=${TOKEN}/" ./node.sh
 doctl compute droplet create master \
 	--region $REGION \
 	--image ubuntu-16-04-x64 \
-	--size 1gb \
+	--size 2gb \
 	--tag-name k8s-master \
 	--ssh-keys $SSH_KEY \
 	--user-data-file  ./master.sh \
@@ -45,7 +45,7 @@ sed -i.bak "s/^MASTER_IP=.*/MASTER_IP=${MASTER_IP}/" ./node.sh
 doctl compute droplet create node1 \
 	--region $REGION \
 	--image ubuntu-16-04-x64 \
-	--size 1gb \
+	--size 2gb \
 	--tag-name k8s-node \
 	--ssh-keys $SSH_KEY \
 	--user-data-file  ./node.sh \
